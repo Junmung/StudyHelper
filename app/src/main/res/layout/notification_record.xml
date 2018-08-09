@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/notification_ImageView_noti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.5"
+            android:paddingLeft="4dp"
+            app:srcCompat="@drawable/record_noti" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="9"
+            android:gravity="left|center"
+            android:text="음성녹음" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/notification_TextView_FileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="6"
+            android:paddingLeft="32dp"
+            android:text="안드로이드 발표"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/notification_TextView_RecordingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="32dp"
+            android:layout_weight="2"
+            android:text="00:17"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/notification_ImageView_recording"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorInvisible"
+            android:visibility="visible"
+            app:srcCompat="@drawable/recording_48dp" />
+
+        <Button
+            android:id="@+id/notification_Button_Stop"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/stop_128dp"
+            android:scaleType="centerInside"
+            android:visibility="visible"
+            app:srcCompat="@drawable/stop_128dp" />
+    </LinearLayout>
+
+</LinearLayout>

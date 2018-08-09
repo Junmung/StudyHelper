@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/bottom_item_study"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/tab_study_selector"
+        android:title="Study"
+        />
+    <item
+        android:id="@+id/bottom_item_record"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/tab_record_selector"
+        android:title="Record"
+        />
+    <item
+        android:id="@+id/bottom_item_calendar"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/tab_calendar_selector"
+        android:title="Calendar"
+        />
+    <item
+        android:id="@+id/bottom_item_memo"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/tab_memo_selector"
+        android:title="Memo"
+        />
+</menu>

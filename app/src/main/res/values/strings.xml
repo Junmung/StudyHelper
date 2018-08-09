@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">StudyHelper</string>
+    <string name="open_drawer">OpenDrawer</string>
+    <string name="close_drawer">CloseDrawer</string>
+
+</resources>

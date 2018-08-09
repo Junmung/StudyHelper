@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fragment_timer_layout_timer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fragment_timer_layout_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text=":"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintStart_toEndOf="@+id/fragment_timer_Picker_hour"
+            app:layout_constraintTop_toTopOf="@+id/fragment_timer_Picker_min" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text=":"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_timer_Picker_sec"
+            app:layout_constraintStart_toEndOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintTop_toTopOf="@+id/fragment_timer_Picker_min" />
+
+        <Button
+            android:id="@+id/fragment_timer_Button_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="타이머 시작"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_timer_Picker_sec"
+            app:layout_constraintStart_toEndOf="@+id/fragment_timer_Picker_hour"
+            app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="시간"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_timer_Picker_hour"
+            app:layout_constraintStart_toStartOf="@+id/fragment_timer_Picker_hour" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="분"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView17"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintStart_toStartOf="@+id/fragment_timer_Picker_min" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="초"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_timer_Picker_sec"
+            app:layout_constraintStart_toStartOf="@+id/fragment_timer_Picker_sec" />
+
+        <NumberPicker
+            android:id="@+id/fragment_timer_Picker_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="false"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline13"></NumberPicker>
+
+        <NumberPicker
+            android:id="@+id/fragment_timer_Picker_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_timer_Picker_sec"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_timer_Picker_hour"
+            app:layout_constraintTop_toTopOf="@+id/fragment_timer_Picker_hour"></NumberPicker>
+
+        <NumberPicker
+            android:id="@+id/fragment_timer_Picker_sec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_timer_Picker_min"
+            app:layout_constraintTop_toTopOf="@+id/fragment_timer_Picker_min"></NumberPicker>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="타이머 종료"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_timer_Button_start"
+            app:layout_constraintStart_toStartOf="@+id/fragment_timer_Button_start"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_timer_Button_start" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
