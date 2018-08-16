@@ -8,4 +8,5 @@
 
 **Library**     : Realm, Gson, RecyclerView, MPAndroidChart, VerticalViewPager, PhotoView, ClansFloatingActionButton
               
-![Alt Text](https://github.com/Junmung/StudyHelper/gifs/공부.gif)
+
+[[ https://github.com/Junmung/StudyHelper/gifs/공부.gif | height = 100px ]]
