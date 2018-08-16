@@ -10,7 +10,7 @@
               
 ![Study](./gifs/study.gif)
 
-![Record](./gifs/record.gif)
+![Record](./gifs/record_.gif)
 
 ![Calendar](./gifs/calendar.gif)
 
