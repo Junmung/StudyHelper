@@ -8,3 +8,4 @@
 
 **Library**     : Realm, Gson, RecyclerView, MPAndroidChart, VerticalViewPager, PhotoView, ClansFloatingActionButton
               
+![Alt Text](file:///Users/Junmung/Downloads/공부.gif)
