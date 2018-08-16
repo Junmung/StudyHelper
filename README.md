@@ -10,4 +10,12 @@
               
 ![Study](./gifs/study.gif)
 
+![Record](./gifs/record.gif)
+
+![Calendar](./gifs/calendar.gif)
+
+![Memo](./gifs/memo.gif)
+
+![Graph](./gifs/graph.gif)
+
 
