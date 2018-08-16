@@ -18,11 +18,8 @@ public class DrawerItemAdapter extends BaseAdapter{
     public DrawerItemAdapter() {
         drawerItems = new ArrayList<>();
         drawerItems.add(new DrawerItem(R.drawable.account_24dp, "StudyHelper"));
-        drawerItems.add(new DrawerItem(R.drawable.question_24dp, "질문하기"));
         drawerItems.add(new DrawerItem(R.drawable.report_24dp, "공부시간 보고"));
         drawerItems.add(new DrawerItem(R.drawable.chart_24dp, "통계"));
-        drawerItems.add(new DrawerItem(R.drawable.naver_24dp, "팀노바 블로그"));
-        //drawerItems.add(new DrawerItem(R.drawable.setting_24dp, "설정"));
         drawerItems.add(new DrawerItem(R.drawable.email_24dp, "문의하기"));
     }
 

@@ -3,7 +3,6 @@ package com.example.junmung.StudyHelper.Statistic;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -38,9 +36,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -71,7 +66,7 @@ public class Fragment_Statistic extends Fragment{
 
     private Cursor cursor;
 
-    private ArrayList<DayItem> items;
+    private ArrayList<DayItem> dayItems;
     private ArrayList<Integer> weekStudyTimes;
     private ArrayList<Integer> monthStudyTimes;
 
@@ -158,13 +153,13 @@ public class Fragment_Statistic extends Fragment{
     private void createEntriesForDay(boolean isFirstStart) {
         int studyTime;
 
-        // 처음시작이라면 2주 기간의 데이터만 보여준다.
+        // 시작시 2주 기간의 데이터만 보여준다.
         if(isFirstStart){
             int j = 0;
             xAxisValues = new String[TWOWEEK];
-            for(int i = items.size() - TWOWEEK; i < items.size(); i++){
-                studyTime = items.get(i).getStudyTime();
-                xAxisValues[j] = String.format("%d월 %d일", items.get(i).getMonth(), items.get(i).getDay());
+            for(int i = dayItems.size() - TWOWEEK; i < dayItems.size(); i++){
+                studyTime = dayItems.get(i).getStudyTime();
+                xAxisValues[j] = String.format("%d월 %d일", dayItems.get(i).getMonth(), dayItems.get(i).getDay());
                 entries.add(new Entry(j, convertTimeToPercent(studyTime)));
                 j++;
             }
@@ -172,11 +167,11 @@ public class Fragment_Statistic extends Fragment{
         else{
             entries.clear();
             getSelectedDayItemsFromDB(startMonth, startDay, endMonth, endDay);
-            xAxisValues = new String[items.size()];
+            xAxisValues = new String[dayItems.size()];
             int i;
-            for(i = 0; i < items.size(); i++){
-                studyTime = items.get(i).getStudyTime();
-                xAxisValues[i] = String.format("%d월 %d일", items.get(i).getMonth(), items.get(i).getDay());
+            for(i = 0; i < dayItems.size(); i++){
+                studyTime = dayItems.get(i).getStudyTime();
+                xAxisValues[i] = String.format("%d월 %d일", dayItems.get(i).getMonth(), dayItems.get(i).getDay());
                 entries.add(new Entry(i, convertTimeToPercent(studyTime)));
             }
         }
@@ -240,7 +235,7 @@ public class Fragment_Statistic extends Fragment{
 
     // Cursor 에서 데이터를 가져와 세팅한다.
     private void getDayItemsFromCursor(){
-        items = new ArrayList<>();
+        dayItems = new ArrayList<>();
         DayItem dayItem;
         int month, day, studyTime, targetTime;
         boolean hasMemo;
@@ -253,12 +248,12 @@ public class Fragment_Statistic extends Fragment{
             hasMemo = cursor.getInt(4) > 0;
 
             dayItem = new DayItem(month, day, studyTime, targetTime, hasMemo);
-            items.add(dayItem);
+            dayItems.add(dayItem);
         }
         cursor.close();
     }
 
-    // items 를 주단위 List 로 바꿔준다. x축 값도 추가로 저장한다.
+    // dayItems 를 월단위 List 로 바꿔준다. x축 값도 추가로 저장한다.ㅇ
     private void convertMonthUnit(){
         monthStudyTimes = new ArrayList<>();
         int monthStudyTime = 0;
@@ -266,10 +261,12 @@ public class Fragment_Statistic extends Fragment{
         xAxisValues = new String[getCurrentMonth()];
         int count = 0;
 
+
         for(i = 0; i < getCurrentMonth()-1; i++){
-            int size = items.get(count).getLastDayOfMonth();
+            int size = dayItems.get(count).getLastDayOfMonth();
+
             for(j = 0; j < size; j++) {
-                monthStudyTime += items.get(count).getStudyTime();
+                monthStudyTime += dayItems.get(count).getStudyTime();
                 count++;
             }
             monthStudyTimes.add(monthStudyTime);
@@ -278,14 +275,14 @@ public class Fragment_Statistic extends Fragment{
         }
 
         for(j = 0; j < getCurrentDay(); j++){
-            monthStudyTime += items.get(count).getStudyTime();
+            monthStudyTime += dayItems.get(count).getStudyTime();
             count++;
         }
         monthStudyTimes.add(monthStudyTime);
         xAxisValues[i] = String.format("%d월", i+1);
     }
 
-    // items 를 주단위 List 로 바꿔준다. x축 값도 추가로 저장한다.
+    // dayItems 를 주단위 List 로 바꿔준다. x축 값도 추가로 저장한다.
     private void convertWeekUnit(){
         weekStudyTimes = new ArrayList<>();
         int weekStudyTime = 0;
@@ -293,19 +290,19 @@ public class Fragment_Statistic extends Fragment{
         int month, day;
         int i;
         int j = 0;
-        xAxisValues = new String[items.size()/7 + 1];
+        xAxisValues = new String[dayItems.size()/WEEK + 1];
 
-        for(i = 0; i < items.size(); i++){
-            if(count < 7){
-                weekStudyTime += items.get(i).getStudyTime();
+        for(i = 0; i < dayItems.size(); i++){
+            if(count < WEEK){
+                weekStudyTime += dayItems.get(i).getStudyTime();
                 if(count == 0){
-                    month = items.get(i).getMonth();
-                    day = items.get(i).getDay();
+                    month = dayItems.get(i).getMonth();
+                    day = dayItems.get(i).getDay();
                     xAxisValues[j] = String.format("%d/%d ~ ", month, day);
                 }
                 else if(count == 6){
-                    month = items.get(i).getMonth();
-                    day = items.get(i).getDay();
+                    month = dayItems.get(i).getMonth();
+                    day = dayItems.get(i).getDay();
                     xAxisValues[j] += String.format("%d/%d", month, day);
                     j++;
                 }
@@ -313,17 +310,17 @@ public class Fragment_Statistic extends Fragment{
                 count++;
             }
 
-            if(count == 7){
+            if(count == WEEK){
                 weekStudyTimes.add(weekStudyTime);
                 count = 0;
                 weekStudyTime = 0;
             }
         }
 
-        if(count < 7){
+        if(count < WEEK){
             weekStudyTimes.add(weekStudyTime);
-            month = items.get(i-1).getMonth();
-            day = items.get(i-1).getDay();
+            month = dayItems.get(i-1).getMonth();
+            day = dayItems.get(i-1).getDay();
             xAxisValues[j] += String.format("%d/%d", month, day);
         }
     }
@@ -335,8 +332,8 @@ public class Fragment_Statistic extends Fragment{
 
         switch(Chart_Case){
             case DAY_CASE:
-                for(int i = 0; i < items.size(); i++) {
-                    int itemStudyTime = items.get(i).getStudyTime();
+                for(int i = 0; i < dayItems.size(); i++) {
+                    int itemStudyTime = dayItems.get(i).getStudyTime();
                     studyTimes.add(itemStudyTime);
                     sum += itemStudyTime;
                 }
@@ -412,7 +409,7 @@ public class Fragment_Statistic extends Fragment{
         dialog.show();
     }
 
-    // 선택된 날짜기간만큼 데이터를 items 에 가져오고, x축 값들을 위한 Strings 도 저장한다.
+    // 선택된 날짜기간만큼 데이터를 dayItems 에 가져오고, x축 값들을 위한 Strings 도 저장한다.
     private void getSelectedDayItemsFromDB(int startMonth, int startDay, int endMonth, int endDay) {
         DatabaseHelper db = DatabaseHelper.getInstance(getContext());
         Cursor cursor = db.getSelectedDatas(startMonth, startDay, endMonth, endDay);
@@ -421,7 +418,7 @@ public class Fragment_Statistic extends Fragment{
         int month, day, studyTime, targetTime;
         boolean hasMemo;
 
-        items.clear();
+        dayItems.clear();
         while (cursor.moveToNext()) {
             month = cursor.getInt(0);
             day = cursor.getInt(1);
@@ -430,7 +427,7 @@ public class Fragment_Statistic extends Fragment{
             hasMemo = cursor.getInt(4) > 0;
 
             dayItem = new DayItem(month, day, studyTime, targetTime, hasMemo);
-            items.add(dayItem);
+            dayItems.add(dayItem);
         }
         cursor.close();
     }

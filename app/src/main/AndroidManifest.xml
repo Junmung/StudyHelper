@@ -58,7 +58,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".PasswordActivity" />
         <activity android:name=".Memo.MemoOpenActivity" />
         <activity android:name=".Memo.MemoImagePagerActivity"></activity>
         <activity android:name=".SplashActivity"></activity>

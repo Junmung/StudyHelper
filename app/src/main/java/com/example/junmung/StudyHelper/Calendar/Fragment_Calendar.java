@@ -132,7 +132,7 @@ public class Fragment_Calendar extends Fragment {
 //                        db.updateStudyTime(j, i, HOUR * random_);
 //                    }
 
-                    for(int i = 1; i < 5; i++){
+                    for(int i = 1; i < 8; i++){
                         Calendar cal = new GregorianCalendar();
                         cal.set(Calendar.YEAR, 2018);
                         cal.set(Calendar.MONTH, i);
@@ -145,10 +145,10 @@ public class Fragment_Calendar extends Fragment {
                             db.updateStudyTime(i, j, HOUR * random_);
                         }
                     }
-                    for( int i =1; i <= 7; i++){
+                    for( int i =1; i <= 16; i++){
                         int random_ = random.nextInt(10);
-                        db.setTargetTime(5, i, HOUR * 10);
-                        db.updateStudyTime(5, i, HOUR * random_);
+                        db.setTargetTime(8, i, HOUR * 10);
+                        db.updateStudyTime(8, i, HOUR * random_);
                     }
 
 //                    fragments.get(4).listUpdate();

@@ -73,7 +73,6 @@ public class EmailActivity extends AppCompatActivity {
                         .putExtra(Intent.EXTRA_SUBJECT, title)
                         .putExtra(Intent.EXTRA_TEXT, contents);
 
-//                startActivity(Intent.createChooser(intent, "메일 유형을 선택하세요."));
                 startActivity(intent);
                 finish();
                 break;

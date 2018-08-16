@@ -34,7 +34,7 @@ public class StudyStatisticActivity extends AppCompatActivity {
 
         for (int i = 0; i < 3; i++) {
             fragments.add(new Fragment_Statistic());
-            fragments.get(i).setCursor(db.getAllDataUntilToday(5, 7));
+            fragments.get(i).setCursor(db.getAllDataUntilToday(8, 16));
         }
 
         fragments.get(0).setChart_Case(Fragment_Statistic.DAY_CASE);

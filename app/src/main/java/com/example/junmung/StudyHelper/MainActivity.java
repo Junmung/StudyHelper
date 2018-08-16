@@ -53,15 +53,11 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_SEND = 0x21;
     static final int REQUEST_CALL = 0x22;
 
-    private ConstraintLayout mainContainer;
-
     private Toolbar toolbar;
     private ActionBar actionBar;
     private ViewPager viewPager;
-//    private TabLayout tabLayout;
     private BottomNavigationView bottomView;
     private MenuItem bottomMenuItem;
-
 
     private ListView menuListView;
     private DrawerLayout drawerLayout;
@@ -73,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // SplashActivity
         startActivity(new Intent(this, SplashActivity.class));
 
         new InitThread().start();
-
     }
 
     class InitThread extends Thread {
@@ -133,20 +129,16 @@ public class MainActivity extends AppCompatActivity {
 
     // UI ID값 가져오는 메소드
     private void getID_setListener() {
-        mainContainer = findViewById(R.id.activity_main_container);
         toolbar = findViewById(R.id.mainActivity_Toolbar);
 
         bottomView = findViewById(R.id.activity_main_BottomNavigationView);
-//        tabLayout = findViewById(R.id.activity_main_TabLayout);
 
         // 뷰페이저 세팅
         viewPager = findViewById(R.id.activity_main_Viewpager);
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(pageChangeListener);
-        //viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(0);
-
 
 
         bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -163,31 +155,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // tabLayout
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-
-
-
         // 드로어 리스트뷰 세팅
         menuListView = findViewById(R.id.activity_main_ListView_menu);
         menuListView.setAdapter(new DrawerItemAdapter());
         menuListView.setOnItemClickListener(new DrawerItemClickListener());
 
+        // 드로어 레이아웃 세팅
         drawerLayout = findViewById(R.id.activity_main_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer){
             @Override
@@ -214,7 +187,9 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
     }
 
-    ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+
+    // ViewPager PageChangeListener
+    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -222,9 +197,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            if(bottomMenuItem != null){
+            if(bottomMenuItem != null)
                 bottomMenuItem.setChecked(false);
-            }
+
             bottomMenuItem = bottomView.getMenu().getItem(position);
             bottomMenuItem.setChecked(true);
         }
@@ -265,77 +240,22 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent;
             switch (position){
-                case 0:
-
-                    break;
-
-                    // 파트장에게 질문하기
-                case 1:
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("선택창")
-                            .setMessage("파트장님께 질문할 방법을 선택하세요.")
-                            .setPositiveButton("전화", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Uri callUri = Uri.parse("tel:01022096432");
-                                    Intent callIntent = new Intent(Intent.ACTION_CALL, callUri);
-
-
-                                    startActivity(callIntent);
-                                }
-                            })
-                            .setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .setNegativeButton("문자", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Uri uri = Uri.parse("smsto:01022096432");
-                                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO, uri);
-
-                                    startActivity(sendIntent);
-                                }
-                            }).show();
-                    break;
-
                     // 공부시간보고
-                case 2:
+                case 1:
                     Intent contactIntent = new Intent(Intent.ACTION_PICK);
                     contactIntent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                     startActivityForResult(contactIntent, REQUEST_CONTACTS);
-
-
                     break;
 
 
                     // 통계
-                case 3:
+                case 2:
                     Intent studyStatisticIntent = new Intent(getApplicationContext(), StudyStatisticActivity.class);
                     startActivity(studyStatisticIntent);
-
-                    break;
-
-
-                    // 블로그 방문
-                case 4:
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.naver.com/manadra"));
-                    startActivity(intent);
-
-                    break;
-
-                    // 설정
-                case 5:
-//                    intent = new Intent(MainActivity.this, SettingActivity.class);
-//                    startActivity(intent);
-                    intent = new Intent(MainActivity.this, EmailActivity.class);
-                    startActivity(intent);
                     break;
 
                     // 개발자에게 문의 (이메일)
-                case 6:
+                case 3:
                     intent = new Intent(MainActivity.this, EmailActivity.class);
                     startActivity(intent);
                     break;
