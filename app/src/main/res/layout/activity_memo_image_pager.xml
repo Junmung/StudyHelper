@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".Memo.MemoImagePagerActivity">
+    tools:context=".memo.MemoImagePagerActivity">
 
-    <com.example.junmung.StudyHelper.Memo.CustomViewPager
+    <com.example.junmung.StudyHelper.memo.CustomViewPager
         android:id="@+id/activity_memo_image_pager_ViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

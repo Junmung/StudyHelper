@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Statistic.StudyStatisticActivity">
+    tools:context=".statistic.StudyStatisticActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_statistic_ToolBar"
@@ -48,7 +48,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="1.0" />
 
-    <com.example.junmung.StudyHelper.Statistic.NonSwipeViewPager
+    <com.example.junmung.StudyHelper.statistic.NonSwipeViewPager
         android:id="@+id/activity_statistic_ViewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"

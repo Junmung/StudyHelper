@@ -27,9 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".TestActivity" />
-        <activity android:name=".Memo.MemoApplyActivity" />
-        <activity android:name=".Drawer.SettingActivity" />
-        <activity android:name=".Drawer.EmailActivity" />
+        <activity android:name=".memo.MemoApplyActivity" />
+        <activity android:name=".drawer.SettingActivity" />
+        <activity android:name=".drawer.EmailActivity" />
 
         <service
             android:name=".Timer.TimerService"
@@ -37,13 +37,13 @@
             android:exported="true" />
 
         <activity
-            android:name=".Statistic.StudyStatisticActivity"
+            android:name=".statistic.StudyStatisticActivity"
             >
 
         </activity>
 
         <service
-            android:name=".Record.RecordService"
+            android:name=".record.RecordService"
             android:enabled="true"
             android:exported="true"
             />
@@ -58,8 +58,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".Memo.MemoOpenActivity" />
-        <activity android:name=".Memo.MemoImagePagerActivity"></activity>
+        <activity android:name=".memo.MemoOpenActivity" />
+        <activity android:name=".memo.MemoImagePagerActivity"></activity>
         <activity android:name=".SplashActivity"></activity>
     </application>
 

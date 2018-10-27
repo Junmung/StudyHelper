@@ -1,10 +1,7 @@
 package com.example.junmung.StudyHelper;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.LauncherActivity;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -15,9 +12,7 @@ import android.os.Looper;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -32,19 +27,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-import com.example.junmung.StudyHelper.Calendar.Fragment_Calendar;
-import com.example.junmung.StudyHelper.DataBase.Calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.Drawer.EmailActivity;
-import com.example.junmung.StudyHelper.Record.Fragment_Record;
-import com.example.junmung.StudyHelper.Memo.Fragment_Memo;
-import com.example.junmung.StudyHelper.Statistic.StudyStatisticActivity;
-import com.example.junmung.StudyHelper.Study.Fragment_Study;
-import com.example.junmung.StudyHelper.Drawer.DrawerItemAdapter;
+import com.example.junmung.StudyHelper.calendar.Fragment_Calendar;
+import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
+import com.example.junmung.StudyHelper.drawer.EmailActivity;
+import com.example.junmung.StudyHelper.record.Fragment_Record;
+import com.example.junmung.StudyHelper.memo.Fragment_Memo;
+import com.example.junmung.StudyHelper.statistic.StudyStatisticActivity;
+import com.example.junmung.StudyHelper.study.Fragment_Study;
+import com.example.junmung.StudyHelper.drawer.DrawerItemAdapter;
 
 import io.realm.Realm;
 
