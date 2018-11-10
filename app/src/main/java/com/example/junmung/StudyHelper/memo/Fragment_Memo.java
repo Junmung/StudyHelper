@@ -1,5 +1,7 @@
 package com.example.junmung.StudyHelper.memo;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -59,6 +61,7 @@ public class Fragment_Memo extends Fragment{
     // EditText 포커싱 잃게 해주는것
     InputMethodManager imm;
 
+    private MemoViewModel viewModel;
 
     public Fragment_Memo() {
 
@@ -68,7 +71,14 @@ public class Fragment_Memo extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        viewModel = ViewModelProviders.of(this).get(MemoViewModel.class);
+        viewModel.getAllMemos().observe(this, new Observer<List<com.example.junmung.StudyHelper.data.Memo>>() {
+            @Override
+            public void onChanged(@Nullable List<com.example.junmung.StudyHelper.data.Memo> memos) {
+                // update the cached copy of the words in the adapter.
 
+            }
+        });
     }
 
     @Nullable
