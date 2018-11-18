@@ -22,14 +22,16 @@ public class Memo {
     @NonNull
     @ColumnInfo(name = "registerDate")
     private Date date;
-    private List<byte[]> images;
 
-    public Memo(int _id, String title, String contents, Date date, @Nullable List<byte[]> images){
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
+
+    public Memo(int _id, String title, String contents, Date date, @Nullable byte[] image){
         this._id = _id;
         this.title = title;
         this.contents = contents;
         this.date = date;
-        this.images = images;
+        this.image = image;
     }
 
     @NonNull
@@ -57,11 +59,11 @@ public class Memo {
         return date;
     }
 
-    public List<byte[]> getImages() {
-        return images;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImages(List<byte[]> images) {
-        this.images = images;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

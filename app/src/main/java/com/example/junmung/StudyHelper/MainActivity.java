@@ -32,6 +32,7 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.example.junmung.StudyHelper.calendar.Fragment_Calendar;
+import com.example.junmung.StudyHelper.data.AppDatabase;
 import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
 import com.example.junmung.StudyHelper.drawer.EmailActivity;
 import com.example.junmung.StudyHelper.record.Fragment_Record;
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     // 키패드가 UI 가리게하기
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+                    AppDatabase.getDatabase(getApplicationContext());
 
                     DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
                     if(databaseHelper.isEmpty())
