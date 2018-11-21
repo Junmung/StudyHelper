@@ -14,7 +14,7 @@ public interface MemoDAO {
 
 
     @Query("DELETE FROM memos WHERE _id IN (:ids) ")
-    void deleteCheckedMemos(int[] ids);
+    void deleteCheckedMemos(List<Integer> ids);
 
     @Query("DELETE FROM memos WHERE _id = :id")
     void delete(int id);

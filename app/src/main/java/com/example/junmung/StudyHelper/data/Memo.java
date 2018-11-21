@@ -59,6 +59,10 @@ public class Memo {
         return date;
     }
 
+    public void setDate(@NonNull Date date) {
+        this.date = date;
+    }
+
     public byte[] getImage() {
         return image;
     }
