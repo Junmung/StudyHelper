@@ -30,9 +30,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.junmung.StudyHelper.data.Memo;
 import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
 import com.example.junmung.StudyHelper.data.memo.Image;
-import com.example.junmung.StudyHelper.data.memo.Memo;
 import com.example.junmung.StudyHelper.R;
 
 import java.io.ByteArrayOutputStream;
@@ -561,8 +561,8 @@ public class MemoApplyActivity extends AppCompatActivity {
                 if(isAddActivity){
                     Date date = new Date();
 
-                    MemoItem memoItem = new MemoItem(title, date, thumbnail);
-                    Fragment_Memo.memoItems.add(0, memoItem);
+//                    Memo memo = new Memo(1, title, contents,date, thumbnail);
+//                    Fragment_Memo.memos.add(0, memo);
 
                     // 디비에 저장
                     saveDataInRealm(title, contents, date);
@@ -576,18 +576,18 @@ public class MemoApplyActivity extends AppCompatActivity {
                     Date date = intentedMemoDate;
 
                     // 어댑터 아이템 수정
-                    for(MemoItem memoItem :Fragment_Memo.memoItems){
-                        if(memoItem.getTitle().equals(intentedMemoTitle)){
-                            memoItem.setTitle(title);
-                            memoItem.setDate(date);
-                            memoItem.setThumbnailImage(thumbnail);
-                        }
-                    }
+//                    for(Memo memo :Fragment_Memo.memos){
+//                        if(memo.getTitle().equals(intentedMemoTitle)){
+//                            memo.setTitle(title);
+//                            memo.setDate(date);
+//                            memo.setImage(thumbnail);
+//                        }
+//                    }
 
                     // Realm 수정
                     updateRealm(intentedMemoTitle, title, contents, bytes);
 
-                    Fragment_Memo.adapter.refresh();
+//                    Fragment_Memo.adapter.refresh();
                     Toast.makeText(this, "메모수정완료", Toast.LENGTH_SHORT).show();
 
                     finish();
@@ -602,7 +602,7 @@ public class MemoApplyActivity extends AppCompatActivity {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
-        Memo memo = realm.where(Memo.class).equalTo("title", originTitle).findFirst();
+        com.example.junmung.StudyHelper.data.memo.Memo memo = realm.where(com.example.junmung.StudyHelper.data.memo.Memo.class).equalTo("title", originTitle).findFirst();
         memo.setTitle(modifyTitle);
         memo.setContents(contents);
 
@@ -623,7 +623,7 @@ public class MemoApplyActivity extends AppCompatActivity {
     private void setOriginData(String title){
         Realm realm = Realm.getDefaultInstance();
 
-        Memo memo = realm.where(Memo.class).equalTo("title", title).findFirst();
+        com.example.junmung.StudyHelper.data.memo.Memo memo = realm.where(com.example.junmung.StudyHelper.data.memo.Memo.class).equalTo("title", title).findFirst();
         String contents = memo.getContents();
         intentedMemoDate = memo.getDate();
 
@@ -654,7 +654,7 @@ public class MemoApplyActivity extends AppCompatActivity {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
-        Memo memo = new Memo(title, contents, date);
+        com.example.junmung.StudyHelper.data.memo.Memo memo = new com.example.junmung.StudyHelper.data.memo.Memo(title, contents, date);
 
         RealmList<Image> images = new RealmList<>();
         for(int i = 0; i < bytes.size(); i++)

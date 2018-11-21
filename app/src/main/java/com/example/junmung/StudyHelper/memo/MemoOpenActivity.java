@@ -1,5 +1,7 @@
 package com.example.junmung.StudyHelper.memo;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.junmung.StudyHelper.data.Memo;
 import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.data.memo.Memo;
 import com.example.junmung.StudyHelper.R;
 
 import java.io.ByteArrayOutputStream;
@@ -53,7 +55,7 @@ public class MemoOpenActivity extends AppCompatActivity {
     private void setOriginData(String memoTitle) {
         Realm realm = Realm.getDefaultInstance();
 
-        Memo memo = realm.where(Memo.class).equalTo("title", memoTitle).findFirst();
+        com.example.junmung.StudyHelper.data.memo.Memo memo = realm.where(com.example.junmung.StudyHelper.data.memo.Memo.class).equalTo("title", memoTitle).findFirst();
         String contents = memo.getContents();
         Date date_ = memo.getDate();
 
@@ -162,19 +164,19 @@ public class MemoOpenActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_delete:
-                MemoItem memoItem = getMemoItemFromRealm(memoTitle);
+                Memo memo = getMemoItemFromRealm(memoTitle);
 
-                updateMemoStateInDB(memoItem);
+                updateMemoStateInDB(memo);
 
                 removeFromRealm(memoTitle);
 
 
-                for(int i = 0; i < Fragment_Memo.memoItems.size(); i++){
-                    if(Fragment_Memo.memoItems.get(i).getTitle().equals(memoTitle))
-                        Fragment_Memo.memoItems.remove(i);
-                }
+//                for(int i = 0; i < Fragment_Memo.memos.size(); i++){
+//                    if(Fragment_Memo.memos.get(i).getTitle().equals(memoTitle))
+//                        Fragment_Memo.memos.remove(i);
+//                }
 
-                Fragment_Memo.adapter.refresh();
+//                Fragment_Memo.adapter.refresh();
                 Toast.makeText(this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
@@ -182,21 +184,23 @@ public class MemoOpenActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(menuItem);
     }
 
-    private MemoItem getMemoItemFromRealm(String memoTitle){
+    private Memo getMemoItemFromRealm(String memoTitle){
         Realm realm = Realm.getDefaultInstance();
 
-        Memo memo = realm.where(Memo.class)
+        com.example.junmung.StudyHelper.data.memo.Memo memo = realm.where(com.example.junmung.StudyHelper.data.memo.Memo.class)
                 .equalTo("title", memoTitle)
                 .findFirst();
 
-        return new MemoItem(memoTitle, memo.getDate());
+//        return new Memo(memoTitle, memo.getDate());
+        byte[] a = null;
+        return new Memo(1,"d", "d", new Date(), a);
     }
 
     private void removeFromRealm(String memoTitle) {
         Realm realm = Realm.getDefaultInstance();
 
         realm.beginTransaction();
-        realm.where(Memo.class)
+        realm.where(com.example.junmung.StudyHelper.data.memo.Memo.class)
                 .equalTo("title", memoTitle)
                 .findFirst()
                 .deleteFromRealm();
@@ -205,25 +209,25 @@ public class MemoOpenActivity extends AppCompatActivity {
         realm.close();
     }
 
-    private void updateMemoStateInDB(MemoItem memoItem) {
-        int month = memoItem.getMonth();
-        int day = memoItem.getDay();
+    private void updateMemoStateInDB(Memo memo) {
+//        int month = memo.getMonth();
+//        int day = memo.getDay();
 
-        if(isLastMemo(month, day)) {
-            DatabaseHelper db = DatabaseHelper.getInstance(this);
-            db.updateMemoState(month, day, 0);
-        }
+//        if(isLastMemo(month, day)) {
+//            DatabaseHelper db = DatabaseHelper.getInstance(this);
+//            db.updateMemoState(month, day, 0);
+//        }
     }
 
     private boolean isLastMemo(int month, int day){
         Realm realm = Realm.getDefaultInstance();
 
         int memoCount = 0;
-        RealmResults results = realm.where(Memo.class).findAll();
+        RealmResults results = realm.where(com.example.junmung.StudyHelper.data.memo.Memo.class).findAll();
 
         for(Object item : results){
-            int memoMonth = ((Memo)item).getMonth();
-            int memoDay = ((Memo)item).getDay();
+            int memoMonth = ((com.example.junmung.StudyHelper.data.memo.Memo)item).getMonth();
+            int memoDay = ((com.example.junmung.StudyHelper.data.memo.Memo)item).getDay();
 
             if(memoMonth == month && memoDay == day){
                 memoCount++;
