@@ -1,231 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_memo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fitsSystemWindows="false"
-    android:tag="3">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="com.example.junmung.StudyHelper.memo.MemoViewModel"/>
+
+        <variable
+            name="btnClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="fabClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/fragment_memo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
+        android:tag="3">
 
-        android:fitsSystemWindows="true">
-        <android.support.design.widget.CollapsingToolbarLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            app:layout_collapseMode="parallax"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintLayout"
+            android:fitsSystemWindows="true">
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
 
-                <TextView
-                    android:id="@+id/fragment_memo_TextView"
-                    android:layout_width="0dp"
+                app:layout_collapseMode="parallax"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="메모 목록"
-                    android:textColor="@android:color/black"
-                    android:textSize="22sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/fragment_memo_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="메모 목록"
+                        android:textColor="@android:color/black"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 
-                <info.hoang8f.widget.FButton
-                    android:id="@+id/fragment_memo_Button_selectRemove"
-                    android:layout_width="76dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="선택삭제"
-                    android:textSize="14sp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_memo_Button_cancel"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_memo_Button_cancel" />
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/btn_remove"
+                        android:layout_width="76dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="선택삭제"
+                        android:textSize="14sp"
+                        android:visibility="@{viewModel.removeMode ? View.VISIBLE : View.GONE}"
+                        android:onClick="@{btnClickListener::onClick}"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_cancel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/btn_cancel" />
 
-                <info.hoang8f.widget.FButton
-                    android:id="@+id/fragment_memo_Button_cancel"
-                    android:layout_width="53dp"
-                    android:layout_height="42dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="취소"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/button4"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_memo_Button_selectRemove"
-                    app:layout_constraintTop_toTopOf="@+id/button4" />
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="53dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="취소"
+                        android:visibility="@{viewModel.removeMode ? View.VISIBLE : View.GONE}"
+                        android:onClick="@{btnClickListener::onClick}"
+                        app:layout_constraintBottom_toBottomOf="@+id/button4"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_remove"
+                        app:layout_constraintTop_toTopOf="@+id/button4" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/search_128dp" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/search_128dp" />
 
-                <EditText
-                    android:id="@+id/fragment_memo_EditText_search"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="4dp"
-                    android:background="@color/colorInvisible"
-                    android:ems="10"
-                    android:hint="검색어"
+                    <EditText
+                        android:id="@+id/text_search"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/colorInvisible"
+                        android:ems="10"
+                        android:hint="검색어"
+                        android:inputType="textPersonName"
+                        android:singleLine="false"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                        app:layout_constraintEnd_toStartOf="@+id/button4"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-                    android:inputType="textPersonName"
-                    android:singleLine="false"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toStartOf="@+id/button4"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="#000000"
+                        android:elevation="1dp"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="#000000"
-                    android:elevation="1dp"
-                    android:paddingBottom="3dp"
-                    android:paddingTop="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="51dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="검색"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_search"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+                        app:layout_constraintTop_toTopOf="@+id/text_search" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="51dp"
-                    android:layout_height="42dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="검색"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_memo_EditText_search"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_memo_Button_cancel"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_memo_EditText_search" />
+                    <View
+                        android:id="@+id/divi"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="?android:attr/listDivider"
+                        android:elevation="1dp"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/fragment_memo_TextView" />
+                </android.support.constraint.ConstraintLayout>
 
-                <View
-                    android:id="@+id/divi"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="?android:attr/listDivider"
-                    android:elevation="1dp"
-                    android:paddingBottom="3dp"
-                    android:paddingTop="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_memo_TextView" />
-            </android.support.constraint.ConstraintLayout>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-
-    </android.support.design.widget.AppBarLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_memo_RecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="visible"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="top|bottom|center"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fragment_memo_Fab_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        </android.support.design.widget.AppBarLayout>
 
 
-        android:visibility="visible"
-        app:layout_anchor="@+id/fragment_memo_RecyclerView"
-        app:layout_anchorGravity="right|bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu_animationDelayPerItem="50"
-        app:menu_backgroundColor="@android:color/transparent"
-        app:menu_buttonSpacing="0dp"
-        app:menu_colorNormal="#DA4336"
-        app:menu_colorPressed="#E75043"
-        app:menu_colorRipple="#99FFFFFF"
-        app:menu_fab_size="normal"
-        app:menu_icon="@drawable/fab_add"
-        app:menu_labels_colorNormal="#333333"
-        app:menu_labels_colorPressed="#444444"
-        app:menu_labels_colorRipple="#66FFFFFF"
-        app:menu_labels_cornerRadius="3dp"
-        app:menu_labels_ellipsize="none"
-        app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
-        app:menu_labels_margin="0dp"
-        app:menu_labels_maxLines="-1"
-        app:menu_labels_padding="8dp"
-        app:menu_labels_paddingBottom="4dp"
-        app:menu_labels_paddingLeft="8dp"
-        app:menu_labels_paddingRight="8dp"
-        app:menu_labels_paddingTop="4dp"
-        app:menu_labels_position="left"
-        app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
-        app:menu_labels_showShadow="true"
-        app:menu_labels_singleLine="false"
-        app:menu_labels_textColor="#FFFFFF"
-        app:menu_labels_textSize="14sp"
-        app:menu_openDirection="up"
-        app:menu_shadowColor="#66000000"
-        app:menu_shadowRadius="4dp"
-        app:menu_shadowXOffset="1dp"
-        app:menu_shadowYOffset="3dp"
-        app:menu_showShadow="true">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_memo_Fab_remove"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/memo_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/delete"
-            app:fab_label="삭제"
-            app:fab_size="mini"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="top|bottom|center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            />
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fab_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            app:layout_anchor="@+id/memo_list"
+            app:layout_anchorGravity="right|bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu_animationDelayPerItem="50"
+            app:menu_backgroundColor="@android:color/transparent"
+            app:menu_buttonSpacing="0dp"
+            app:menu_colorNormal="#DA4336"
+            app:menu_colorPressed="#E75043"
+            app:menu_colorRipple="#99FFFFFF"
+            app:menu_fab_size="normal"
+            app:menu_icon="@drawable/fab_add"
+            app:menu_labels_colorNormal="#333333"
+            app:menu_labels_colorPressed="#444444"
+            app:menu_labels_colorRipple="#66FFFFFF"
+            app:menu_labels_cornerRadius="3dp"
+            app:menu_labels_ellipsize="none"
+            app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+            app:menu_labels_margin="0dp"
+            app:menu_labels_maxLines="-1"
+            app:menu_labels_padding="8dp"
+            app:menu_labels_paddingBottom="4dp"
+            app:menu_labels_paddingLeft="8dp"
+            app:menu_labels_paddingRight="8dp"
+            app:menu_labels_paddingTop="4dp"
+            app:menu_labels_position="left"
+            app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+            app:menu_labels_showShadow="true"
+            app:menu_labels_singleLine="false"
+            app:menu_labels_textColor="#FFFFFF"
+            app:menu_labels_textSize="14sp"
+            app:menu_openDirection="up"
+            app:menu_shadowColor="#66000000"
+            app:menu_shadowRadius="4dp"
+            app:menu_shadowXOffset="1dp"
+            app:menu_shadowYOffset="3dp"
+            app:menu_showShadow="true">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_memo_Fab_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pen_add"
-            app:fab_label="추가"
-            app:fab_size="mini" />
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_remove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delete"
+                app:fab_label="삭제"
+                app:fab_size="mini"
+
+                />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pen_add"
+                app:fab_label="추가"
+                app:fab_size="mini" />
 
 
-    </com.github.clans.fab.FloatingActionMenu>
+        </com.github.clans.fab.FloatingActionMenu>
 
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
