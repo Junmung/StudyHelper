@@ -13,10 +13,10 @@ public class MemoRepository {
     public MemoRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         memoDAO = db.memoDAO();
-        allMemos = (MutableLiveData<List<Memo>>) memoDAO.getAllMemos();
     }
 
     public MutableLiveData<List<Memo>> getAllMemos(){
+        allMemos = (MutableLiveData<List<Memo>>) memoDAO.getAllMemos();
         return allMemos;
     }
 
@@ -79,5 +79,7 @@ public class MemoRepository {
         }
     }
 
-
+    public Memo getMemo(int index){
+        return memoDAO.getMemoById(index).getValue();
+    }
 }
