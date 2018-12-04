@@ -1,18 +1,17 @@
-package com.example.junmung.StudyHelper.data;
+package com.example.junmung.studyhelper.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity(tableName = "memos")
 public class Memo {
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
     private int _id;
 
     @NonNull
@@ -25,6 +24,10 @@ public class Memo {
 
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] image;
+
+    @Ignore
+    public Memo() {
+    }
 
     public Memo(int _id, String title, String contents, Date date, @Nullable byte[] image){
         this._id = _id;

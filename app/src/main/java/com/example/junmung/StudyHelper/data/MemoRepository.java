@@ -1,6 +1,7 @@
-package com.example.junmung.StudyHelper.data;
+package com.example.junmung.studyhelper.data;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
@@ -8,15 +9,15 @@ import java.util.List;
 
 public class MemoRepository {
     private MemoDAO memoDAO;
-    private MutableLiveData<List<Memo>> allMemos;
+    private LiveData<List<Memo>> allMemos = new MutableLiveData<>();
 
     public MemoRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         memoDAO = db.memoDAO();
     }
 
-    public MutableLiveData<List<Memo>> getAllMemos(){
-        allMemos = (MutableLiveData<List<Memo>>) memoDAO.getAllMemos();
+    public LiveData<List<Memo>> getAllMemos(){
+        allMemos = memoDAO.getAllMemos();
         return allMemos;
     }
 
@@ -79,7 +80,17 @@ public class MemoRepository {
         }
     }
 
-    public Memo getMemo(int index){
-        return memoDAO.getMemoById(index).getValue();
+    public LiveData<List<Memo>> searchList(String title) {
+        String likeTitle = "%" + title + "%";
+        allMemos = memoDAO.searchList(likeTitle);
+        return  allMemos;
+    }
+
+    public LiveData<Memo> getMemo(int index){
+        return memoDAO.getMemoById(index);
+    }
+
+    public void update(Memo memo){
+        memoDAO.update(memo);
     }
 }

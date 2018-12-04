@@ -1,11 +1,14 @@
-package com.example.junmung.StudyHelper.data;
+package com.example.junmung.studyhelper.data;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
+
+import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface MemoDAO {
@@ -29,6 +32,10 @@ public interface MemoDAO {
     @Query("SELECT * FROM memos WHERE _id = :id")
     LiveData<Memo> getMemoById(int id);
 
+    @Update(onConflict = REPLACE)
+    void update(Memo memo);
 
+    @Query("SELECT * FROM memos WHERE title LIKE :title")
+    LiveData<List<Memo>> searchList(String title);
 
 }
