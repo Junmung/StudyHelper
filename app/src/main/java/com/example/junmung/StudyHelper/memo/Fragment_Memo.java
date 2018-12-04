@@ -1,35 +1,35 @@
-package com.example.junmung.StudyHelper.memo;
+package com.example.junmung.studyhelper.memo;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.junmung.StudyHelper.data.Memo;
-import com.example.junmung.StudyHelper.R;
-import com.example.junmung.StudyHelper.databinding.FragmentMemoBinding;
+import com.example.junmung.studyhelper.MainActivity;
+import com.example.junmung.studyhelper.data.Memo;
+import com.example.junmung.studyhelper.R;
+import com.example.junmung.studyhelper.databinding.FragmentMemoBinding;
 import com.github.clans.fab.FloatingActionButton;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-
 public class Fragment_Memo extends Fragment{
+    private final int layoutId = R.layout.item_memo;
     private final static int REQUEST_MEMO_ADD = 0x200;
+    private final static int REQUEST_MEMO_DELETE = 0x201;
 
     private MemoAdapter adapter;
 
@@ -37,10 +37,11 @@ public class Fragment_Memo extends Fragment{
 
     private FragmentMemoBinding binding;
 
+    /**
+     *  removemode 처리하기
+     */
 
-    public Fragment_Memo() {
-
-    }
+    public Fragment_Memo() { }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,24 +51,23 @@ public class Fragment_Memo extends Fragment{
 
     private void viewModelInit(){
         vm = ViewModelProviders.of(this).get(MemoViewModel.class);
-
-        vm.getMemos().observe(this, memos -> {
-            adapter.setMemoList(memos);
-            adapter.refresh();
-        });
+        vm.memos.observe(this, memos -> adapter.setMemoList(memos));
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_memo, container, false);
-        binding();
+        bind();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         return binding.getRoot();
     }
 
-    private void binding(){
+    private void bind(){
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(vm);
+
         // 버튼
         binding.setBtnClickListener(btnClickListener);
         binding.btnRemove.setButtonColor(getResources().getColor(R.color.colorPrimary));
@@ -90,34 +90,17 @@ public class Fragment_Memo extends Fragment{
         binding.fabMenu.setClosedOnTouchOutside(true);
         binding.fabMenu.bringToFront();
         binding.fabMenu.setOnMenuToggleListener(opened -> {
+            // selector 처리하기
             if(opened)
                 binding.fabMenu.setBackgroundColor(getResources().getColor(R.color.colorGray));
             else
                 binding.fabMenu.setBackgroundColor(getResources().getColor(R.color.colorInvisible));
         });
 
-        // 검색창
-        binding.textSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(binding.textSearch.getText().toString());
-            }
-        });
-
         // RecyclerView
         binding.memoList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if(dy > 0)
                     binding.fabMenu.hideMenuButton(true);
                 else
@@ -128,13 +111,38 @@ public class Fragment_Memo extends Fragment{
         binding.memoList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.memoList.setHasFixedSize(true);
 
-        adapter = new MemoAdapter(vm.getMemos().getValue(), vm.getRemoveMode());
+        MemoClickListener memoClickListener = new MemoClickListener() {
+            @Override
+            public void onClick(Memo memo) {
+                Intent intent = new Intent(getContext(), MemoOpenActivity.class);
+                intent.putExtra("MemoIndex", memo.get_id());
+                startActivityForResult(intent, REQUEST_MEMO_DELETE);
+            }
+
+            @Override
+            public boolean onLongClick(Memo memo) {
+                new AlertDialog.Builder(getContext())
+                        .setMessage("수정하시겠습니까?")
+                        .setPositiveButton("확인", (dialog, which) -> {
+                            Intent intent = new Intent(getContext(), MemoApplyActivity.class);
+                            intent.putExtra("Purpose", "Modify");
+                            intent.putExtra("MemoIndex", memo.get_id());
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("취소", (dialog, which) -> {
+                        })
+                        .show();
+                return true;
+            }
+        };
+        adapter = new MemoAdapter(vm.removeMode, layoutId, memoClickListener);
+
         binding.memoList.setAdapter(adapter);
 
     }
 
 
-    // 취소, 선택삭제 버튼클릭리스너
+    // 취소, 선택삭제 버튼클릭리스너 -> 메뉴 버튼으로 바꿔야함
     private Button.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -146,12 +154,10 @@ public class Fragment_Memo extends Fragment{
 
                     // 선택삭제 버튼
                 case R.id.btn_remove:
-                    if (vm.getMemos().getValue().size() == 0)
-                        return;
                     vm.setRemoveMode(false);
-                    binding.textSearch.setText("");
-                    binding.textSearch.clearFocus();
-                    hideKeyboard(binding.textSearch.getWindowToken());
+                    binding.editSearch.setText("");
+                    binding.editSearch.clearFocus();
+                    hideKeyboard(binding.editSearch.getWindowToken());
                     vm.selectRemove(adapter.getCheckedMemoIndexes());
 
                     break;
@@ -166,8 +172,8 @@ public class Fragment_Memo extends Fragment{
             switch(v.getId()){
                 case R.id.fab_add:
                     binding.fabMenu.close(true);
-                    Intent intent = new Intent(getActivity().getApplicationContext(), MemoApplyActivity.class);
-                    intent.putExtra("Purpose", "Add");
+                    Intent intent = new Intent(getActivity(), MemoApplyActivity.class);
+                    intent.putExtra("isApply", true);
                     startActivityForResult(intent, REQUEST_MEMO_ADD);
                     break;
 
@@ -190,69 +196,17 @@ public class Fragment_Memo extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == getActivity().RESULT_OK){
-            if(requestCode == REQUEST_MEMO_ADD){
-
-            }
-//                adapter.updateList(memos);
-        }
-    }
-
-    // 글자 필터링하기
-    private void filter(String searchWord) {
-        vm.clearSearchMemos();
-
-        if(searchWord.length() == 0)
-            adapter.setMemoList(vm.getMemos().getValue());
-        else{
-            for(Memo item : vm.getMemos().getValue()){
-                if(item.getTitle().contains(searchWord))
-                    vm.addSearchMemo(item);
+        if(resultCode == MainActivity.RESULT_OK){
+            switch (requestCode) {
+                case REQUEST_MEMO_ADD:
+                    break;
+                case REQUEST_MEMO_DELETE:
+                    vm.delete(data.getIntExtra("MemoIndex", -1));
+                    Toast.makeText(getContext().getApplicationContext(), "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
-
-        adapter.setMemoList(vm.getSearchMemos().getValue());
     }
-
-
-    private void updateMemoStateInDB(ArrayList<Memo> removedItems){
-        int month, day;
-
-        for(int i = 0; i < removedItems.size(); i++){
-//            month = removedItems.get(i).getMonth();
-//            day = removedItems.get(i).getDay();
-
-//            if(isLastMemo(month, day)) {
-//                DatabaseHelper db = DatabaseHelper.getInstance(getContext());
-//                db.updateMemoState(month, day, 0);
-//            }
-        }
-
-        removedItems.clear();
-    }
-
-    private Bitmap resizeImage(Bitmap srcBitmap, int resizedWidth, int resizedHeight, int quality) {
-        // 원본 이미지의 정보
-        int srcWidth = srcBitmap.getWidth();
-        int srcHeight = srcBitmap.getHeight();
-
-
-        float ratioX = resizedWidth / (float)srcWidth;
-        float ratioY = resizedHeight / (float)srcHeight;
-
-        int dstWidth = Math.round(srcWidth * ratioX);
-        int dstHeight = Math.round(srcHeight * ratioY);
-
-        // 파일 리사이즈
-        Bitmap output = Bitmap.createScaledBitmap(srcBitmap, dstWidth, dstHeight, false);
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-
-        output.compress(Bitmap.CompressFormat.JPEG, quality, bs);
-
-        return output;
-    }
-
-
 }
 
 

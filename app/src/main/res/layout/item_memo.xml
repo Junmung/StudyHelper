@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.junmung.StudyHelper.utils.DateTypeConverter"/>
+        <import type="com.example.junmung.studyhelper.utils.DateTypeConverter"/>
         <import type="android.view.View"/>
 
         <variable
-            name="memo"
-            type="com.example.junmung.StudyHelper.data.Memo"/>
+            name="obj"
+            type="com.example.junmung.studyhelper.data.Memo"/>
 
         <variable
-            name="removeMode"
-            type="android.databinding.ObservableBoolean"/>
-
+            name="adapter"
+            type="com.example.junmung.studyhelper.memo.MemoAdapter"/>
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> adapter.onItemClick(obj)}"
+        android:onLongClick="@{() -> adapter.onItemLongClick(obj)}"
+        >
 
         <ImageView
             android:id="@+id/thumbnail"
@@ -30,6 +34,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:scaleType="fitXY"
+            bind:imageByte="@{obj.image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +48,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{memo.title}"
+            android:text="@{obj.title}"
             android:textColor="#000000"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
@@ -59,7 +64,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{DateTypeConverter.toString(memo.date)}"
+            android:text="@{DateTypeConverter.toString(obj.date)}"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/checkbox"
@@ -72,7 +77,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:visibility="@{removeMode ? View.VISIBLE : View.GONE}"
+            android:visibility="@{adapter.isRemoveMode() ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.junmung.StudyHelper.memo.MemoViewModel"/>
+            type="com.example.junmung.studyhelper.memo.MemoViewModel"/>
 
         <variable
             name="btnClickListener"
@@ -100,7 +100,7 @@
                         app:srcCompat="@drawable/search_128dp" />
 
                     <EditText
-                        android:id="@+id/text_search"
+                        android:id="@+id/edit_search"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -111,6 +111,7 @@
                         android:inputType="textPersonName"
                         android:singleLine="false"
                         android:textSize="18sp"
+                        android:text="@={viewModel.searchWord}"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView"
                         app:layout_constraintEnd_toStartOf="@+id/button4"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -136,9 +137,9 @@
                         android:layout_marginEnd="8dp"
                         android:text="검색"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_search"
+                        app:layout_constraintBottom_toBottomOf="@+id/edit_search"
                         app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
-                        app:layout_constraintTop_toTopOf="@+id/text_search" />
+                        app:layout_constraintTop_toTopOf="@+id/edit_search" />
 
                     <View
                         android:id="@+id/divi"
@@ -227,6 +228,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/delete"
+                android:onClick="@{fabClickListener::onClick}"
+                android:textSize="15sp"
+                android:shadowColor="@color/fbutton_color_asbestos"
                 app:fab_label="삭제"
                 app:fab_size="mini"
 
@@ -238,6 +242,9 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@drawable/pen_add"
+                android:onClick="@{fabClickListener::onClick}"
+                android:textSize="15sp"
+                android:shadowColor="@color/fbutton_color_asbestos"
                 app:fab_label="추가"
                 app:fab_size="mini" />
 
