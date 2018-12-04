@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.record;
+package com.example.junmung.studyhelper.record;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,8 +14,8 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.example.junmung.StudyHelper.MainActivity;
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.MainActivity;
+import com.example.junmung.studyhelper.R;
 
 public class RecordService extends Service {
     RecordThread recordThread;

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.data;
+package com.example.junmung.studyhelper.data;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-import com.example.junmung.StudyHelper.utils.DateTypeConverter;
+import com.example.junmung.studyhelper.utils.DateTypeConverter;
 
 @Database(entities = {Memo.class}, version = 1, exportSchema = false)
 @TypeConverters({DateTypeConverter.class})

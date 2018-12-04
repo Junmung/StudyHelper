@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.junmung.StudyHelper">
+    package="com.example.junmung.studyhelper">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.junmung.studyhelper.MainActivity"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".TestActivity" />
-        <activity android:name=".memo.MemoApplyActivity" />
+        <activity android:name="com.example.junmung.studyhelper.memo.MemoApplyActivity" />
         <activity android:name=".drawer.SettingActivity" />
-        <activity android:name=".drawer.EmailActivity" />
+        <activity android:name="com.example.junmung.studyhelper.drawer.EmailActivity" />
 
         <service
             android:name=".Timer.TimerService"
@@ -37,20 +37,20 @@
             android:exported="true" />
 
         <activity
-            android:name=".statistic.StudyStatisticActivity"
+            android:name="com.example.junmung.studyhelper.statistic.StudyStatisticActivity"
             >
 
         </activity>
 
         <service
-            android:name=".record.RecordService"
+            android:name="com.example.junmung.studyhelper.record.RecordService"
             android:enabled="true"
             android:exported="true"
             />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.junmung.StudyHelper.provider"
+            android:authorities="com.example.junmung.studyhelper.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -58,9 +58,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".memo.MemoOpenActivity" />
-        <activity android:name=".memo.MemoImagePagerActivity"></activity>
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name="com.example.junmung.studyhelper.memo.MemoOpenActivity" />
+        <activity android:name="com.example.junmung.studyhelper.memo.MemoImagePagerActivity"></activity>
+        <activity android:name="com.example.junmung.studyhelper.SplashActivity"></activity>
     </application>
 
 </manifest>

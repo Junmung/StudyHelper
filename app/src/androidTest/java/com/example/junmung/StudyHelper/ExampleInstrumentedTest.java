@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper;
+package com.example.junmung.studyhelper;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

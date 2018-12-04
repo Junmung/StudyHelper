@@ -48,7 +48,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="1.0" />
 
-    <com.example.junmung.StudyHelper.statistic.NonSwipeViewPager
+    <com.example.junmung.studyhelper.statistic.NonSwipeViewPager
         android:id="@+id/activity_statistic_ViewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"

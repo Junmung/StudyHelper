@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.drawer;
+package com.example.junmung.studyhelper.drawer;
 
 public class DrawerItem {
     private int img;

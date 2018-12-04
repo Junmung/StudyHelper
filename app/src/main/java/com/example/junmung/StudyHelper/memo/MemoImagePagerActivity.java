@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.memo;
+package com.example.junmung.studyhelper.memo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.junmung.StudyHelper.data.memo.Memo;
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.data.origmemo.Memo;
+import com.example.junmung.studyhelper.R;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;

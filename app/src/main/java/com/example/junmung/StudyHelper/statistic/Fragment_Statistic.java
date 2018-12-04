@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.statistic;
+package com.example.junmung.studyhelper.statistic;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -19,9 +19,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.junmung.StudyHelper.calendar.DayItem;
-import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.calendar.DayItem;
+import com.example.junmung.studyhelper.data.calendar.DatabaseHelper;
+import com.example.junmung.studyhelper.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.record;
+package com.example.junmung.studyhelper.record;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -27,7 +27,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

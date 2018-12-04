@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.statistic;
+package com.example.junmung.studyhelper.statistic;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.data.calendar.DatabaseHelper;
+import com.example.junmung.studyhelper.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.calendar;
+package com.example.junmung.studyhelper.calendar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,10 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.data.memo.Memo;
-import com.example.junmung.StudyHelper.memo.MemoOpenActivity;
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.data.calendar.DatabaseHelper;
+import com.example.junmung.studyhelper.data.origmemo.Memo;
+import com.example.junmung.studyhelper.memo.MemoOpenActivity;
+import com.example.junmung.studyhelper.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper;
+package com.example.junmung.studyhelper;
 
 import android.Manifest;
 import android.app.PendingIntent;
@@ -31,15 +31,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-import com.example.junmung.StudyHelper.calendar.Fragment_Calendar;
-import com.example.junmung.StudyHelper.data.AppDatabase;
-import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.drawer.EmailActivity;
-import com.example.junmung.StudyHelper.record.Fragment_Record;
-import com.example.junmung.StudyHelper.memo.Fragment_Memo;
-import com.example.junmung.StudyHelper.statistic.StudyStatisticActivity;
-import com.example.junmung.StudyHelper.study.Fragment_Study;
-import com.example.junmung.StudyHelper.drawer.DrawerItemAdapter;
+import com.example.junmung.studyhelper.calendar.Fragment_Calendar;
+import com.example.junmung.studyhelper.data.AppDatabase;
+import com.example.junmung.studyhelper.data.Memo;
+import com.example.junmung.studyhelper.data.MemoRepository;
+import com.example.junmung.studyhelper.data.calendar.DatabaseHelper;
+import com.example.junmung.studyhelper.drawer.EmailActivity;
+import com.example.junmung.studyhelper.record.Fragment_Record;
+import com.example.junmung.studyhelper.memo.Fragment_Memo;
+import com.example.junmung.studyhelper.statistic.StudyStatisticActivity;
+import com.example.junmung.studyhelper.study.Fragment_Study;
+import com.example.junmung.studyhelper.drawer.DrawerItemAdapter;
+
+import java.util.Date;
 
 import io.realm.Realm;
 

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.study;
+package com.example.junmung.studyhelper.study;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,7 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.R;
 import com.shinelw.library.ColorArcProgressBar;
 
 import info.hoang8f.widget.FButton;

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.calendar;
+package com.example.junmung.studyhelper.calendar;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.junmung.StudyHelper.data.calendar.DatabaseHelper;
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.data.calendar.DatabaseHelper;
+import com.example.junmung.studyhelper.R;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 

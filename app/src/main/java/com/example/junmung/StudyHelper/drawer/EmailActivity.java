@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.drawer;
+package com.example.junmung.studyhelper.drawer;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.R;
 
 public class EmailActivity extends AppCompatActivity {
     private Toolbar toolbar;

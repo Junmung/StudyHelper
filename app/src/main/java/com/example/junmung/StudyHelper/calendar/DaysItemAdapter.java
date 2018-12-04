@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.calendar;
+package com.example.junmung.studyhelper.calendar;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

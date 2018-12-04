@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.drawer;
+package com.example.junmung.studyhelper.drawer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.R;
 
 import java.util.ArrayList;
 

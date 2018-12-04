@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.calendar;
+package com.example.junmung.studyhelper.calendar;
 
 import java.util.Calendar;
 

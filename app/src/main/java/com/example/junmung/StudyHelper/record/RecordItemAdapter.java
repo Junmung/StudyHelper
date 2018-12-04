@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.record;
+package com.example.junmung.studyhelper.record;
 
 import android.content.Context;
 import android.os.Environment;
@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.junmung.StudyHelper.R;
+import com.example.junmung.studyhelper.R;
 
 import java.util.ArrayList;
 

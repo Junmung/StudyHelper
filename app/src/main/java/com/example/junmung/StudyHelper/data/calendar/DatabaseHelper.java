@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.data.calendar;
+package com.example.junmung.studyhelper.data.calendar;
 
 
 import android.content.Context;

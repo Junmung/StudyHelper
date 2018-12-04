@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper;
+package com.example.junmung.studyhelper;
 
 import android.os.Handler;
 import android.os.Message;

@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper;
+package com.example.junmung.studyhelper;
 
 import org.junit.Test;
 

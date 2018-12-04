@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.statistic;
+package com.example.junmung.studyhelper.statistic;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

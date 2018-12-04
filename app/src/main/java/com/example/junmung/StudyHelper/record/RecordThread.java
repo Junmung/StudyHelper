@@ -1,4 +1,4 @@
-package com.example.junmung.StudyHelper.record;
+package com.example.junmung.studyhelper.record;
 
 import android.content.Context;
 import android.content.SharedPreferences;
