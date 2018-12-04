@@ -1,5 +1,6 @@
-package com.example.junmung.StudyHelper.utils;
+package com.example.junmung.studyhelper.utils;
 
+import android.annotation.SuppressLint;
 import android.arch.persistence.room.TypeConverter;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ public class DateTypeConverter {
         return value == null ? null : value.getTime();
     }
 
+    @SuppressLint("SimpleDateFormat")
     public static String toString(Date date){
         return new SimpleDateFormat("M월 dd일 a h:mm").format(date);
     }
